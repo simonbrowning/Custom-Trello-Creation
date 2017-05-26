@@ -1,0 +1,117 @@
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="main.css" rel="stylesheet">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+  <div id="content"></div>
+
+  <!--Select Template -->
+  <script id="select_template" type="text/x-handlebars-template">
+    <form class="form-horizontal">
+        <div class="form-group">
+          <label for="card_list">Card to copy</label>
+          <div class="col-sm-10">
+            <select id="card_list" class="form-control">
+              {{#each cards}}
+              <option value="{{this.id}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="columns_list">Destination list</label>
+          <div class="col-sm-10">
+            <select id="columns_list" class="form-control">
+              {{#each columns}}
+              <option value="{{this.id}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+          <label for="columns_list">Title for new card</label>
+          <div class="col-sm-10">
+            <input id="card_name" maxlength="16384" class="form-control" />
+          </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" class="btn btn-success" id="copy_card" disabled>Copy Card</button>
+            </div>
+          </div>
+    </form>
+  </script>
+
+  <!-- Description Template -->
+  <script id="description_template" type="text/x-handlebars-template">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <textarea class="form-control" rows="4" cols="50" maxlength="16384" id="description" placeholder="Please add a description for the card..."></textarea>
+    </div>
+    <br />
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-success" id="update_description" disabled>Update Description</button>
+      </div>
+    </div>
+  </form>
+  </script>
+
+  <!-- Checkbox Template -->
+  <script id="checkbox_template" type="text/x-handlebars-template">
+  <form class="form-horizontal">
+    <div class="form-group">
+      {{#each  checkLists}}
+        <label>{{this.name}}</label>
+        <ul id="{{this.id}}">
+        {{#each this.checkItems}}
+        <li>
+          <input type="checkbox" value="{{this.id}}"/>  {{this.name}}<br />
+        </li>
+        {{/each}}
+      </ul>
+      {{/each}}
+    </div>
+    <br />
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="button" class="btn btn-success" id="update_checkbox" disabled>Submit Changes</button>
+      </div>
+    </div>
+    </form>
+  </script>
+
+  <!-- Open Template -->
+  <script id="open_template" type="text/x-handlebars-template">
+  <div class="form-group">
+    {{#if lastUpdate}}
+      <h4><a href="{{link}}" target="_blank">{{name}}</a></h4>
+      <p><b>Last Update: </b>{{lastUpdate}}</p>
+      <p><b>Current Board: </b>{{boardName}}</p>
+      <p><b>Current List: </b>{{listName}}</p>
+    {{else}}
+      <p>No updates on the card yet!</p>
+    {{/if}}
+  </div>
+  </script>
+
+  <!-- Error Template -->
+  <script id="error_template" type="text/x-handlebars-template">
+    <p>{{status}} - {{statusText}} error.</p>
+  </script>
+  <!-- https://github.com/zendesk/zendesk_app_framework_sdk -->
+  <script type="text/javascript" src="https://assets.zendesk.com/apps/sdk/2.0/zaf_sdk.js"></script>
+  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+  <script src="https://api.trello.com/1/client.js?key=1990f605ec48936f1643a0d69e8c48b9"></script>
+  <script src="https://cdn.jsdelivr.net/jquery/3.0.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
